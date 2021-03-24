@@ -1,6 +1,7 @@
 package com.ptit.sqa.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Table
@@ -28,6 +29,8 @@ public class User {
     String email;
     @Column(name = "role")
     String role;
+    private Collection<Clazz> clazzesById;
+    private Collection<ClassStudent> classStudentsById;
     public Long getId() {
         return id;
     }
@@ -106,5 +109,23 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<Clazz> getClazzesById() {
+        return clazzesById;
+    }
+
+    public void setClazzesById(Collection<Clazz> clazzesById) {
+        this.clazzesById = clazzesById;
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<ClassStudent> getClassStudentsById() {
+        return classStudentsById;
+    }
+
+    public void setClassStudentsById(Collection<ClassStudent> classStudentsById) {
+        this.classStudentsById = classStudentsById;
     }
 }
