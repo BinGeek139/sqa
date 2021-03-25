@@ -6,7 +6,7 @@ import java.util.Objects;
 @Entity
 public class Mark {
     private Long id;
-    private Integer mark;
+    private Float mark;
     private Spoint spointBySpointId;
     private ClassStudent classStudentByClassStudentId;
 
@@ -24,11 +24,11 @@ public class Mark {
 
     @Basic
     @Column(name = "Mark")
-    public Integer getMark() {
+    public Float getMark() {
         return mark;
     }
 
-    public void setMark(Integer mark) {
+    public void setMark(Float mark) {
         this.mark = mark;
     }
 

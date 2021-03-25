@@ -13,6 +13,9 @@ public class Clazz {
     private Semester semesterBySemesterId;
     private User userByUserId;
     private List<ClassStudent> classStudentsById;
+    private String code;
+
+
 
     @Id
     @GeneratedValue
@@ -85,5 +88,14 @@ public class Clazz {
 
     public void setClassStudentsById(List<ClassStudent> classStudentsById) {
         this.classStudentsById = classStudentsById;
+    }
+    @Basic
+    @Column(name = "code")
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

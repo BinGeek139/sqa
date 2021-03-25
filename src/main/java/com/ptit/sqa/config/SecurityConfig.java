@@ -50,20 +50,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable();
-        http.authorizeRequests().
-                antMatchers( "/login","/403","/error","/sub-login",
-                        "/resources/**",
-                        "/static/**",
-                        "/vendor/**",
-                        "/js/**",
-                        "/images/**",
-                        "/fonts/**",
-                        "/css/**",
-                        "/bootstrap/**",
-                        "/plugins/**",
-                        "/webjars/**").
-                permitAll().anyRequest().
-                hasAnyRole("ADMIN", "USER","TEACHER")
+        http.authorizeRequests().anyRequest().permitAll()
+//                antMatchers( "/login","/403","/error","/sub-login",
+//                        "/resources/**",
+//                        "/static/**",
+//                        "/vendor/**",
+//                        "/js/**",
+//                        "/images/**",
+//                        "/fonts/**",
+//                        "/css/**",
+//                        "/bootstrap/**",
+//                        "/plugins/**",
+//                        "/webjars/**").
+//                permitAll().anyRequest().
+//                hasAnyRole("ADMIN", "USER","TEACHER")
                 .and().exceptionHandling()
                 .accessDeniedHandler(new CustomAccessDeniedHandler());
     }

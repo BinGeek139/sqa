@@ -27,6 +27,17 @@ public class User {
     private String address;
     @Column(name = "role")
     String role;
+    @Column(name = "code")
+    String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @OneToMany(mappedBy = "userByUserId")
     private  List<Clazz> clazzesById;
     @OneToMany(mappedBy = "userByUserId")
