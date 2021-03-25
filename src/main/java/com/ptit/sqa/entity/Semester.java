@@ -1,7 +1,7 @@
 package com.ptit.sqa.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,7 +9,7 @@ public class Semester {
     private Long id;
     private String name;
     private Integer year;
-    private Collection<Clazz> clazzesById;
+    private List<Clazz> clazzesById;
 
     @Id
     @GeneratedValue
@@ -57,11 +57,11 @@ public class Semester {
     }
 
     @OneToMany(mappedBy = "semesterBySemesterId")
-    public Collection<Clazz> getClazzesById() {
+    public List<Clazz> getClazzesById() {
         return clazzesById;
     }
 
-    public void setClazzesById(Collection<Clazz> clazzesById) {
+    public void setClazzesById(List<Clazz> clazzesById) {
         this.clazzesById = clazzesById;
     }
 }

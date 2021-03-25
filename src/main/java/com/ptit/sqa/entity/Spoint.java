@@ -1,7 +1,7 @@
 package com.ptit.sqa.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,7 +9,7 @@ public class Spoint {
     private Long id;
     private String name;
     private Integer percent;
-    private Collection<Mark> marksById;
+    private  List<Mark> marksById;
     private Subject subjectBySubjectId;
 
     @Id
@@ -59,11 +59,11 @@ public class Spoint {
     }
 
     @OneToMany(mappedBy = "spointBySpointId")
-    public Collection<Mark> getMarksById() {
+    public  List<Mark> getMarksById() {
         return marksById;
     }
 
-    public void setMarksById(Collection<Mark> marksById) {
+    public void setMarksById( List<Mark> marksById) {
         this.marksById = marksById;
     }
 

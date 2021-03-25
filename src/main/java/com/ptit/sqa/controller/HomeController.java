@@ -14,13 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@SessionAttributes({ "currentUser" })
 @Controller
 public class HomeController {
     private static final Logger log = LoggerFactory.getLogger(HomeController.class);
@@ -30,6 +28,13 @@ public class HomeController {
         model.addAttribute("userLogin",userLogin);
         return "login";
     }
+    @GetMapping(path = "hi")
+    public String home(){
+        return "index";
+    }
+
+
+
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -66,10 +71,7 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping(path = "")
-    public  String home(){
-        return "index";
-    }
+
     private void validatePrinciple(Object principal) {
         if (!(principal instanceof CustomUserDetails)) {
             throw new IllegalArgumentException("Principal can not be null!");

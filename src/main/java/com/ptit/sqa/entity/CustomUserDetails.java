@@ -4,7 +4,6 @@ import com.ptit.sqa.common.Const;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,9 +58,9 @@ public class CustomUserDetails implements UserDetails {
         return Const.ACTIVE.equals(user.getStatus());
     }
 
-    public static void main(String[] args) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        System.out.println(bCryptPasswordEncoder.encode("giaovien"));
-        System.out.println(bCryptPasswordEncoder.encode("hocsinh"));
-    }
+//    public static void main(String[] args) {
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        System.out.println(bCryptPasswordEncoder.encode("giaovien"));
+//        System.out.println(bCryptPasswordEncoder.encode("hocsinh"));
+//    }
 }

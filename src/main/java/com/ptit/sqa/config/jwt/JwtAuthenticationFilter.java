@@ -28,6 +28,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        log.info("url: "+request.getRequestURI());
+//        log.debug("pathInfo: "+request.getPathInfo());
         try {
             String jwt = getJwtFromRequest(request);
             if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
@@ -53,9 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             if("Authorization".equals(nameToken)){
                 String bearerToken=cookie.getValue();
-                if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-                    return bearerToken.substring(7);
-                }
+                return  bearerToken;
             }
         }
 

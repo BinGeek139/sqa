@@ -2,7 +2,7 @@ package com.ptit.sqa.entity;
 
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,7 +11,7 @@ public class ClassStudent {
     private Long id;
     private User userByUserId;
     private Clazz clazzByClassId;
-    private Collection<Mark> marksById;
+    private List<Mark> marksById;
 
     @Id
     @GeneratedValue
@@ -59,11 +59,11 @@ public class ClassStudent {
     }
 
     @OneToMany(mappedBy = "classStudentByClassStudentId")
-    public Collection<Mark> getMarksById() {
+    public List<Mark> getMarksById() {
         return marksById;
     }
 
-    public void setMarksById(Collection<Mark> marksById) {
+    public void setMarksById(List<Mark> marksById) {
         this.marksById = marksById;
     }
 }

@@ -1,7 +1,7 @@
 package com.ptit.sqa.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 
 @Table
@@ -25,12 +25,12 @@ public class User {
     private Integer gender;
     @Column(name = "address")
     private String address;
-    @Column(name = "email")
-    String email;
     @Column(name = "role")
     String role;
-    private Collection<Clazz> clazzesById;
-    private Collection<ClassStudent> classStudentsById;
+    @OneToMany(mappedBy = "userByUserId")
+    private  List<Clazz> clazzesById;
+    @OneToMany(mappedBy = "userByUserId")
+    private  List<ClassStudent> classStudentsById;
     public Long getId() {
         return id;
     }
@@ -95,13 +95,6 @@ public class User {
         this.address = address;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getRole() {
         return role;
@@ -111,21 +104,21 @@ public class User {
         this.role = role;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<Clazz> getClazzesById() {
+
+    public  List<Clazz> getClazzesById() {
         return clazzesById;
     }
 
-    public void setClazzesById(Collection<Clazz> clazzesById) {
+    public void setClazzesById( List<Clazz> clazzesById) {
         this.clazzesById = clazzesById;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<ClassStudent> getClassStudentsById() {
+
+    public  List<ClassStudent> getClassStudentsById() {
         return classStudentsById;
     }
 
-    public void setClassStudentsById(Collection<ClassStudent> classStudentsById) {
+    public void setClassStudentsById( List<ClassStudent> classStudentsById) {
         this.classStudentsById = classStudentsById;
     }
 }

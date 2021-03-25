@@ -1,15 +1,15 @@
 package com.ptit.sqa.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Subject {
     private Long id;
     private String name;
-    private Collection<Clazz> clazzesById;
-    private Collection<Spoint> spointsById;
+    private  List<Clazz> clazzesById;
+    private  List<Spoint> spointsById;
 
     @Id
     @GeneratedValue
@@ -48,20 +48,20 @@ public class Subject {
     }
 
     @OneToMany(mappedBy = "subjectBySubjectId")
-    public Collection<Clazz> getClazzesById() {
+    public  List<Clazz> getClazzesById() {
         return clazzesById;
     }
 
-    public void setClazzesById(Collection<Clazz> clazzesById) {
+    public void setClazzesById( List<Clazz> clazzesById) {
         this.clazzesById = clazzesById;
     }
 
     @OneToMany(mappedBy = "subjectBySubjectId")
-    public Collection<Spoint> getSpointsById() {
+    public  List<Spoint> getSpointsById() {
         return spointsById;
     }
 
-    public void setSpointsById(Collection<Spoint> spointsById) {
+    public void setSpointsById( List<Spoint> spointsById) {
         this.spointsById = spointsById;
     }
 }
