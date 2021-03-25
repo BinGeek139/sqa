@@ -59,6 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/images/**",
                         "/fonts/**",
                         "/css/**",
+                        "/bootstrap/**",
+                        "/plugins/**",
                         "/webjars/**").
                 permitAll().anyRequest().
                 hasAnyRole("ADMIN", "USER","TEACHER")
