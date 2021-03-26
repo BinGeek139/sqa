@@ -1,6 +1,6 @@
 package com.ptit.sqa.model;
 
-public class StaticResponse {
+public class StatisticResponse {
     Integer index;
     String nameSubject;
     String codeClass;
@@ -9,7 +9,7 @@ public class StaticResponse {
     Integer studentNotPass;
     Integer sum;
 
-    public StaticResponse(Integer index, String nameSubject, String codeClass, String teacher, Integer studentPass, Integer studentNotPass, Integer sum) {
+    public StatisticResponse(Integer index, String nameSubject, String codeClass, String teacher, Integer studentPass, Integer studentNotPass, Integer sum) {
         this.index = index;
         this.nameSubject = nameSubject;
         this.codeClass = codeClass;

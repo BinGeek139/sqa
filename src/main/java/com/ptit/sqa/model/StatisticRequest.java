@@ -1,6 +1,13 @@
 package com.ptit.sqa.model;
 
 public class StatisticRequest {
-    String semester;
-    String clazz;
+    Long idSemester;
+
+    public Long getIdSemester() {
+        return idSemester;
+    }
+
+    public void setIdSemester(Long idSemester) {
+        this.idSemester = idSemester;
+    }
 }

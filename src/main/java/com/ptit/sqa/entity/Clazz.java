@@ -81,7 +81,7 @@ public class Clazz {
         this.userByUserId = userByUserId;
     }
 
-    @OneToMany(mappedBy = "clazzByClassId")
+    @OneToMany(mappedBy = "clazzByClassId",fetch = FetchType.EAGER)
     public List<ClassStudent> getClassStudentsById() {
         return classStudentsById;
     }

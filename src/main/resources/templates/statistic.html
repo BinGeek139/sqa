@@ -31,13 +31,7 @@
 
         /*}*/
 
-        /*#table-wrapper table thead th .text {*/
-        /*    position:absolute;*/
-        /*    top:-20px;*/
-        /*    z-index:2;*/
-        /*    height:20px;*/
-        /*    width:35%;*/
-        /*}*/
+
 
 
         #hoverTable tr:hover{
@@ -60,6 +54,22 @@
 <!-- Custom Scripts -->
 <script type="text/javascript" src="js/custom.js"></script>
 <section style="padding-top: 100px">
+
+    <form class="form-inline"
+          th:action="@{/statistic}" th:object="${statisticRequest}" method="get"
+    >
+
+        <div class="form-group mb-2">
+            <label for="exampleFormControlSelect1">Chọn kì học</label>
+            <select  class="form-control" id="exampleFormControlSelect1" th:field="*{idSemester}">
+                <option th:each="semester : ${semesters}"
+                th:value="${semester.id}" th:text="${semester.value}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Xác nhận</button>
+    </form>
+
+
     <div id="table-wrapper">
         <div id="table-scroll">
             <table id="hoverTable" class="table table-hover">
