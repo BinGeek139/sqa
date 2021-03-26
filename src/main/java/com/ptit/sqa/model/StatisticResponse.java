@@ -9,6 +9,9 @@ public class StatisticResponse {
     Integer studentNotPass;
     Integer sum;
 
+    public StatisticResponse() {
+    }
+
     public StatisticResponse(Integer index, String nameSubject, String codeClass, String teacher, Integer studentPass, Integer studentNotPass, Integer sum) {
         this.index = index;
         this.nameSubject = nameSubject;

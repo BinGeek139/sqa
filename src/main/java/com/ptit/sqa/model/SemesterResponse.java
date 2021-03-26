@@ -17,6 +17,7 @@ public class SemesterResponse {
         this.value = value;
     }
 
+
     public String getValue() {
         return value;
     }

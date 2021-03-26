@@ -1,5 +1,6 @@
 package com.ptit.sqa.config;
 
+import com.ptit.sqa.common.Const;
 import com.ptit.sqa.config.jwt.CustomAccessDeniedHandler;
 import com.ptit.sqa.config.jwt.JwtAuthenticationFilter;
 import com.ptit.sqa.service.impl.UserDetailsServiceImpl;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
@@ -31,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return super.authenticationManagerBean();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
@@ -51,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable();
         http.authorizeRequests().
-                antMatchers( "/login","/403","/error","/sub-login",
+                antMatchers("/login", "/403", "/error", "/sub-login",
                         "/resources/**",
                         "/static/**",
                         "/vendor/**",
@@ -63,10 +66,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/plugins/**",
                         "/webjars/**").
                 permitAll().anyRequest().
-                hasAnyRole("ADMIN", "USER","TEACHER")
+                hasAnyRole(Const.ROLE_USER, Const.ROLE_TEACHER, Const.ROLE_ADMIN)
                 .and().exceptionHandling()
                 .accessDeniedHandler(new CustomAccessDeniedHandler());
     }
 
-    }
+}
 

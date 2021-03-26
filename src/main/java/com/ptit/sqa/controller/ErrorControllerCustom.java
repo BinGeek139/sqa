@@ -18,14 +18,14 @@ public class ErrorControllerCustom implements ErrorController {
     }
 
     @RequestMapping("error")
-    public String handleError(HttpServletRequest request, HttpServletResponse response, Model model){
+    public String handleError(HttpServletRequest request, HttpServletResponse response, Model model) {
         Integer status = response.getStatus();
-        if(!Objects.isNull(status) && 403 == status.intValue()){
-            UserLogin userLogin=new UserLogin();
-            model.addAttribute("userLogin",userLogin);
+        if (!Objects.isNull(status) && 403 == status.intValue()) {
+            UserLogin userLogin = new UserLogin();
+            model.addAttribute("userLogin", userLogin);
             return "login";
         }
-        model.addAttribute("status",status);
+        model.addAttribute("status", status);
         return "error";
     }
 }

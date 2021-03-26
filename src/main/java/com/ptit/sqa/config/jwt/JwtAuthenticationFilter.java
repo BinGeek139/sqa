@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final Logger log= LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+    private final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
     @Autowired
     JwtTokenProvider jwtTokenProvider;
 
@@ -28,14 +28,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        log.info("url: "+request.getRequestURI());
-//        log.debug("pathInfo: "+request.getPathInfo());
         try {
             String jwt = getJwtFromRequest(request);
             if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
                 Long userId = jwtTokenProvider.getUserIdFromJWT(jwt);
                 UserDetails userDetails = userDetailsService.loadUserById(userId.intValue());
-                if(userDetails != null) {
+                if (userDetails != null) {
                     UsernamePasswordAuthenticationToken
                             authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -48,14 +46,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
+
     private String getJwtFromRequest(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
-            String nameToken= cookie.getName();
+            String nameToken = cookie.getName();
 
-            if("Authorization".equals(nameToken)){
-                String bearerToken=cookie.getValue();
-                return  bearerToken;
+            if ("Authorization".equals(nameToken)) {
+                String bearerToken = cookie.getValue();
+                return bearerToken;
             }
         }
 

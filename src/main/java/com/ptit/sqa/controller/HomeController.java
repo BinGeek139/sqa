@@ -27,14 +27,16 @@ import java.util.Iterator;
 @Controller
 public class HomeController {
     private static final Logger log = LoggerFactory.getLogger(HomeController.class);
+
     @GetMapping(path = {"login"})
-    public String login(Model model){
-        UserLogin userLogin=new UserLogin();
-        model.addAttribute("userLogin",userLogin);
+    public String login(Model model) {
+        UserLogin userLogin = new UserLogin();
+        model.addAttribute("userLogin", userLogin);
         return "login";
     }
+
     @GetMapping(path = "hi")
-    public String home(){
+    public String home() {
         return "index";
     }
 
@@ -42,11 +44,12 @@ public class HomeController {
     AuthenticationManager authenticationManager;
     @Autowired
     private JwtTokenProvider tokenProvider;
+
     @PostMapping(path = {"login"})
-    public String loginSub(Model model, HttpSession session, UserLogin loginRequest, HttpServletResponse response, ModelMap modelMap){
+    public String loginSub(Model model, HttpSession session, UserLogin loginRequest, HttpServletResponse response, ModelMap modelMap) {
         log.info("postLogin()");
         ModelAndView modelAndView;
-        try{
+        try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginRequest.getUserName(),
@@ -56,14 +59,14 @@ public class HomeController {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
-            Cookie cookie=new Cookie("Authorization",jwt);
+            Cookie cookie = new Cookie("Authorization", jwt);
             response.addCookie(cookie);
             return "redirect:/";
 
-        } catch (Exception e){
-            model.addAttribute("message"," Sai tài khoản hoặc mật khẩu");
+        } catch (Exception e) {
+            model.addAttribute("message", " Sai tài khoản hoặc mật khẩu");
             loginRequest.setPassword("");
-            modelMap.addAttribute("userLogin",loginRequest)
+            modelMap.addAttribute("userLogin", loginRequest)
             ;
             return "login";
         }
@@ -71,22 +74,19 @@ public class HomeController {
     }
 
     @PostMapping(path = {"logout"})
-    public String loginFailure(Model model, HttpServletRequest request){
+    public String loginFailure(Model model, HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         Iterator<Cookie> iterator = Arrays.stream(cookies).iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Cookie cookie = iterator.next();
-            String nameToken= cookie.getName();
-            if("Authorization".equals(nameToken)){
+            String nameToken = cookie.getName();
+            if ("Authorization".equals(nameToken)) {
                 iterator.remove();
                 break;
             }
         }
         return "redirect:/login";
     }
-
-
-
 
 
 }

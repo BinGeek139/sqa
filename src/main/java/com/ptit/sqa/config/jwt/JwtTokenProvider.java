@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
-    private final Logger log= LoggerFactory.getLogger(JwtTokenProvider.class);
+    private final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
     private final String JWT_SECRET = "ngocquangptit";
     private final long JWT_EXPIRATION = 3600000L;
 
