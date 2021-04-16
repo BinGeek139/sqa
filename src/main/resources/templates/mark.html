@@ -17,12 +17,66 @@
     <link href="css/animations.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+    <style type="text/css">
+        #table-wrapper {
+            position:relative;
+        }
+        #table-scroll {
+            height:350px;
+            overflow:auto;
+            margin-top:20px;
+        }
+        /*#table-wrapper table {*/
+        /*    width:100%;*/
+
+        /*}*/
+
+        /*#table-wrapper table thead th .text {*/
+        /*    position:absolute;*/
+        /*    top:-20px;*/
+        /*    z-index:2;*/
+        /*    height:20px;*/
+        /*    width:35%;*/
+        /*}*/
+
+
+        #hoverTable tr:hover{
+            background-color: greenyellow ;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header }"></div>
 <section style="padding-top: 100px">
-    <p>Nhap diem </p>
+
+
 </section>
+
+<div>
+    <div id="table-wrapper">
+        <div id="table-scroll">
+            <table id="hoverTable" class="table table-hover">
+                <thead>
+                <th scope="col-1" class="text">STT</th>
+                <th scope="col-2" class="text">Mã lớp</th>
+                <th scope="col-3" class="text">Môn học</th>
+                <th scope="col-4" class="text">Số sv</th>
+                <th scope="col-5" class="text">Chi tiết</th>
+                </thead>
+                <tbody>
+                <tr th:each=" class,index : ${classes}">
+                    <td th:text="${index.count}"></td>
+                    <td th:each="entry : ${class}"
+                        th:text="${entry.value}"></td>
+                    <td></td>
+                    <td><a th:href="${'/mark/' + class.cname}">view</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 
 <!-- JavaScript -->
 <script type="text/javascript" src="plugins/jquery.min.js"></script>

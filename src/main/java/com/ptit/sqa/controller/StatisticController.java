@@ -35,6 +35,7 @@ public class StatisticController {
         List<Semester> semesters = semesterRepository.findAll();
         List<SemesterResponse> semesterResponses = new ArrayList<>();
         List<Clazz> clazzList = clazzRepository.findAll();
+        List<StatisticResponse> statisticResponses=new ArrayList<>();
         for (int i = 0; i < clazzList.size(); i++) {
             Clazz clazz = clazzList.get(i);
             StatisticResponse statisticResponse = new StatisticResponse();
@@ -59,8 +60,11 @@ public class StatisticController {
             statisticResponse.setStudentPass(pass);
             statisticResponse.setStudentNotPass(classStudents.size() - pass);
             statisticResponse.setSum(classStudents.size());
+            statisticResponses.add(statisticResponse);
+
         }
-        model.addAttribute("statisticResponseList", semesterResponses);
+
+        model.addAttribute("statisticResponseList", statisticResponses);
         model.addAttribute("semesters", semesterResponses);
         model.addAttribute("statisticRequest", statisticRequest);
         return "statistic";
