@@ -3,7 +3,6 @@ package com.ptit.sqa.controller;
 import com.ptit.sqa.config.jwt.JwtTokenProvider;
 import com.ptit.sqa.entity.CustomUserDetails;
 import com.ptit.sqa.model.UserLogin;
-import com.ptit.sqa.service.impl.DemoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,11 +27,10 @@ import java.util.Iterator;
 @Controller
 public class HomeController {
     private static final Logger log = LoggerFactory.getLogger(HomeController.class);
-    @Inject
-    DemoService service;
+
     @GetMapping(path = {"login"})
     public String login(Model model) {
-        System.out.println( service.getNumber());
+
         UserLogin userLogin = new UserLogin();
         model.addAttribute("userLogin", userLogin);
         return "login";

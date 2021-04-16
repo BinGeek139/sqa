@@ -51,7 +51,7 @@ public class StatisticController {
                     sumMarkForStudent += mark.getMark() * mark.getSpointBySpointId().getPercent() / 100;
                 }
                 sumMarkForStudent = Math.floor(sumMarkForStudent);
-                if (sumMarkForStudent >= Const.POINT_PASS_THE_SUBJECT) {
+                if (sumMarkForStudent > Const.POINT_PASS_THE_SUBJECT) {
                     pass++;
                 }
             }
