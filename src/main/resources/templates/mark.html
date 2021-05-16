@@ -60,15 +60,13 @@
                 <th scope="col-1" class="text">STT</th>
                 <th scope="col-2" class="text">Mã lớp</th>
                 <th scope="col-3" class="text">Môn học</th>
-                <th scope="col-4" class="text">Số sv</th>
                 <th scope="col-5" class="text">Chi tiết</th>
                 </thead>
                 <tbody>
                 <tr th:each=" class,index : ${classes}">
                     <td th:text="${index.count}"></td>
-                    <td th:each="entry : ${class}"
-                        th:text="${entry.value}"></td>
-                    <td></td>
+                    <td th:text="${class.cname}"></td>
+                    <td th:text="${class.sname}"></td>
                     <td><a th:href="${'/mark/' + class.cname}">view</a></td>
                 </tr>
                 </tbody>
