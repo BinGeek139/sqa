@@ -36,7 +36,7 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping(path = "hi")
+    @GetMapping("/home")
     public String home() {
         return "index";
     }
@@ -62,7 +62,7 @@ public class HomeController {
             String jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
             Cookie cookie = new Cookie("Authorization", jwt);
             response.addCookie(cookie);
-            return "redirect:/";
+            return "redirect:/home";
 
         } catch (Exception e) {
             model.addAttribute("message", " Sai tài khoản hoặc mật khẩu");
@@ -73,7 +73,6 @@ public class HomeController {
         }
 
     }
-
     @PostMapping(path = {"logout"})
     public String loginFailure(Model model, HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
