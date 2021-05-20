@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ClazzRepository extends JpaRepository<Clazz,Integer> {
+public interface ClazzRepository extends JpaRepository<Clazz,Long> {
 
     Clazz findClassByName(@Param("className") String className);
 
