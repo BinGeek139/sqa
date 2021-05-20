@@ -63,4 +63,9 @@ public class CustomUserDetails implements UserDetails {
 //        System.out.println(bCryptPasswordEncoder.encode("giaovien"));
 //        System.out.println(bCryptPasswordEncoder.encode("hocsinh"));
 //    }
+
+    public Long getId(){
+        return user.getId();
+    }
+
 }

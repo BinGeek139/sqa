@@ -1,17 +1,15 @@
 package com.ptit.sqa.controller;
 
-import com.ptit.sqa.entity.Clazz;
-import com.ptit.sqa.entity.Mark;
-import com.ptit.sqa.entity.Semester;
-import com.ptit.sqa.entity.Spoint;
+import com.ptit.sqa.entity.*;
 import com.ptit.sqa.model.MarkForm;
 import com.ptit.sqa.model.MarkResponse;
 import com.ptit.sqa.repo.ClazzRepository;
-import com.ptit.sqa.repo.SemesterRepo;
+import com.ptit.sqa.repo.MarkRepository;
+import com.ptit.sqa.repo.SemesterRepository;
 import com.ptit.sqa.service.impl.ClassServiceImpl;
 import com.ptit.sqa.service.impl.MarkFormServiceImpl;
-import com.ptit.sqa.service.impl.MarkServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +21,7 @@ import java.util.Map;
 public class MarkController {
 
     @Autowired
-    SemesterRepo semesterRepo;
-
-    @Autowired
-    ClazzRepository clazzRepository;
+    SemesterRepository semesterRepository;
 
     @Autowired
     ClassServiceImpl classService;
@@ -35,16 +30,20 @@ public class MarkController {
     MarkFormServiceImpl markFormService;
 
     @Autowired
-    MarkServiceImpl markService;
+    ClazzRepository clazzRepository;
+
+    @Autowired
+    MarkRepository markRepository;
 
     @GetMapping(path = {"mark"})
-    public String login(Model model){
+    public String login(Model model, Authentication authentication){
         //get currentSemester
-        Semester currentSemester = semesterRepo.findById(103L).orElse(null);
+        Semester currentSemester = semesterRepository.findActivatingSemester();
         //get current user id
-        Long currentUserId = 10033L;
+        CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
+        Long currentUserId = user.getId();
 
-        List<Map<String, Object>> classes= classService.findAllActivatingClass(currentSemester.getId(),currentUserId);
+        List<Map<String, String>> classes= classService.findAllActivatingClass(currentSemester.getId(),currentUserId);
         model.addAttribute("classes", classes);
         return "mark";
     }
@@ -52,7 +51,7 @@ public class MarkController {
     @GetMapping(path="/mark/{classname}")
     public String classDetail(Model model, @PathVariable("classname") String classname){
 
-        Clazz clazz = classService.findClassByName(classname);
+        Clazz clazz = clazzRepository.findClassByName(classname);
 
         MarkForm markForm=new MarkForm();
         markForm.setClazz(clazz);
@@ -65,21 +64,15 @@ public class MarkController {
     @RequestMapping(value="/mark/{class}", params = "submit", method = RequestMethod.POST)
     public String submit(@ModelAttribute MarkForm markForm, Model model)  {
 
-        for (Spoint spoint : markForm.getSpoints()){
-            System.out.println(spoint.getId());
-        }
-
         for(MarkResponse markResponse : markForm.getMarkResponses()){
             for (int i=0; i<markResponse.getMarkList().size(); i++){
-
                 Mark mark = markResponse.getMarkList().get(i);
-
                 if (mark.getId() == null && mark.getMark() != null) {
-                    markService.insert(mark.getMark(),
+                    markRepository.insert(mark.getMark(),
                             markResponse.getClassStudentId(),
                             markForm.getSpoints().get(i).getId());
                 } else {
-                    markService.update(mark.getMark(), mark.getId());
+                    markRepository.update(mark.getMark(), mark.getId());
                 }
             }
         }
