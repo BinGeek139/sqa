@@ -41,11 +41,18 @@ public class StatisticControllerTest {
         for (int i = rowStart; i < rowStart+numberOfTest ; i++) {
             Row row = sheet.getRow(i);
             Double input=row.getCell(1).getNumericCellValue();
+            Double output=row.getCell(2).getNumericCellValue();
             StatisticRequest statisticRequest=new StatisticRequest();
             statisticRequest.setIdSemester(input.longValue());
             List<StatisticResponse> statisticResponses = statisticService.statisticMark(statisticRequest);
-            row.getCell(2).setCellValue(statisticResponses.size());
+            if(statisticResponses.size() == output.intValue()){
+                row.getCell(3).setCellValue("Pass");
+            }else {
+                row.getCell(3).setCellValue("Fail");
+            }
+
         }
+        workbook.close();
 
 
 //        List<StatisticResponse> statisticResponses = statisticService.statisticMark(null);
