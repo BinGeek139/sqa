@@ -10,7 +10,6 @@ public class TestLogin {
     @Test
     public void testLoginSuccess(){
         BrowserSetting bs = new BrowserSetting();
-
         WebDriver driver = bs.BrowserSettings();
         driver.get("http://localhost:8888/login");
         LoginPage loginPage=new LoginPage(driver);
@@ -23,7 +22,7 @@ public class TestLogin {
 
     @Test
     public void testFalse(){
-        BrowserSetting bs = new BrowserSetting();
+        BrowserSetting  bs = new BrowserSetting();
         WebDriver driver = bs.BrowserSettings();
         driver.get("http://localhost:8888/login");
         LoginPage loginPage=new LoginPage(driver);
