@@ -22,10 +22,15 @@ public class StatisticService {
     @Autowired
     ClazzRepository clazzRepository;
 
-    public List<StatisticResponse> statisticMark(StatisticRequest statisticRequest){
+    public List<StatisticResponse> statisticMark(StatisticRequest statisticRequest) {
+        List<Clazz> clazzList;
+        if (statisticRequest.getIdSemester() == null) {
+            clazzList = clazzRepository.findAll();
+        } else {
+            clazzList=clazzRepository.findByClazzId(statisticRequest.getIdSemester());
+        }
 
-        List<Clazz> clazzList = clazzRepository.findByClazzId(statisticRequest.getIdSemester());
-        List<StatisticResponse> statisticResponses=new ArrayList<>();
+        List<StatisticResponse> statisticResponses = new ArrayList<>();
         for (int i = 0; i < clazzList.size(); i++) {
             Clazz clazz = clazzList.get(i);
             StatisticResponse statisticResponse = new StatisticResponse();

@@ -56,7 +56,7 @@ public class Semester {
         return Objects.hash(id, name, year);
     }
 
-    @OneToMany(mappedBy = "semesterBySemesterId")
+    @OneToMany(mappedBy = "semesterBySemesterId",fetch = FetchType.EAGER)
     public List<Clazz> getClazzesById() {
         return clazzesById;
     }

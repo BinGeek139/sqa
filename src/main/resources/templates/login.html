@@ -40,16 +40,16 @@
 				>
 
 					<div class="wrap-input100 validate-input"  data-validate = "Nhập username">
-						<input th:field="*{userName}" class="input100" type="text" name="username" placeholder="User name">
+						<input id="username" th:field="*{userName}" class="input100" type="text" name="username" placeholder="User name">
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Nhập mật khẩu">
-						<input th:field="*{password}" class="input100" type="password" name="pass" placeholder="Password">
+						<input id="password" th:field="*{password}" class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 					<div class="container-login100-form-btn m-t-32">
-						<button class="login100-form-btn" style="font: bold ; font-family:Arial">
+						<button id="submit" class="login100-form-btn" style="font: bold ; font-family:Arial">
 							Đăng nhập
 						</button>
 					</div>

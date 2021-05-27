@@ -58,7 +58,7 @@ public class ClassStudent {
         this.clazzByClassId = clazzByClassId;
     }
 
-    @OneToMany(mappedBy = "classStudentByClassStudentId")
+    @OneToMany(mappedBy = "classStudentByClassStudentId",fetch = FetchType.EAGER)
     public List<Mark> getMarksById() {
         return marksById;
     }

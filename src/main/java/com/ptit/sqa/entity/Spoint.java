@@ -58,7 +58,7 @@ public class Spoint {
         return Objects.hash(id, name, percent);
     }
 
-    @OneToMany(mappedBy = "spointBySpointId")
+    @OneToMany(mappedBy = "spointBySpointId",fetch = FetchType.EAGER)
     public  List<Mark> getMarksById() {
         return marksById;
     }
